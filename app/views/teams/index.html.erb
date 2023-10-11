@@ -1,0 +1,9 @@
+<h1>All teams</h1>
+
+<% @teams.each do |team| %>
+	<%= team.id %> • 
+	<%= team.name%> 
+	(<%= team.shortname%>) - 
+	<i><%= team.city%></i>
+	<br>
+<% end %>
