@@ -1,0 +1,7 @@
+<h1>All seasons</h1>
+
+<% @seasons.each do |season| %>
+	<%= season.id %> • 
+	<%= season.startyear %>/<%= season.startyear.to_i + 1 %>
+	<br>
+<% end %>

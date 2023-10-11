@@ -5,5 +5,6 @@ Rails.application.routes.draw do
 
   root "standalonepages#homepage"
   resources :leagues, only: [:index]
+  resources :seasons, only: [:index]
 
 end
