@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_11_120422) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_11_121547) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "competitions", force: :cascade do |t|
+    t.bigint "league_id", null: false
+    t.bigint "season_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["league_id"], name: "index_competitions_on_league_id"
+    t.index ["season_id"], name: "index_competitions_on_season_id"
+  end
 
   create_table "leagues", force: :cascade do |t|
     t.string "name"
@@ -27,4 +36,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_11_120422) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "competitions", "leagues"
+  add_foreign_key "competitions", "seasons"
 end
