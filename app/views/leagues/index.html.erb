@@ -1,0 +1,8 @@
+<h1>All leagues</h1>
+
+<% @leagues.each do |league| %>
+	<%= league.id %> • 
+	<%= league.name %>
+	(<%= league.desc %>)
+	<br>
+<% end %>
