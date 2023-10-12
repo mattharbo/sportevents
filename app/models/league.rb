@@ -1,3 +1,3 @@
 class League < ApplicationRecord
-	has_many :leagues, dependent: :destroy
+	has_many :competitions, dependent: :destroy
 end

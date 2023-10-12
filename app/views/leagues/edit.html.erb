@@ -1,0 +1,13 @@
+<h2>Edit league id #<%= @league.id %></h2>
+
+<%= form_for @league do | f | %>
+
+	<%= f.label :name, "Name of the league" %>
+	<%= f.text_field :name %>
+	<br>
+	<%= f.label :desc, "Tell me more" %>
+	<%= f.text_field :desc %>
+	<br><br>
+	<%= f.submit "Update league" %>
+	
+<% end %>

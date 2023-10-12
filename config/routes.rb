@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
 
   root "standalonepages#homepage"
-  resources :leagues, only: [:index]
+  resources :leagues, only: [:index,:new,:create,:show,:edit,:update,:destroy]
   resources :seasons, only: [:index,:new,:create,:show,:edit,:update,:destroy]
   resources :competitions, only: [:index]
   resources :teams, only: [:index]

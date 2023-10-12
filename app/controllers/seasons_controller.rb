@@ -13,9 +13,6 @@ class SeasonsController < ApplicationController
 	def edit
 	end
 
-	def show	
-	end
-
 	def create
 		Season.create(season_params)
 		redirect_to seasons_path
@@ -28,7 +25,6 @@ class SeasonsController < ApplicationController
 
 	def destroy
 		@season.destroy
-		flash[:success] = "The to-do item was successfully destroyed."
 		redirect_to seasons_path
 	end
 

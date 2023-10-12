@@ -1,8 +1,14 @@
 <h1>All leagues</h1>
 
+<h4><%= link_to "Create a league", new_league_path %></h4>
+
 <% @leagues.each do |league| %>
 	<%= league.id %> • 
 	<%= league.name %>
 	(<%= league.desc %>)
+
+	(<small><%= link_to "Edit", edit_league_path(league.id) %></small>)
+
+	(<small><%= link_to "Delete", league_path(league), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %></small>)
 	<br>
 <% end %>
