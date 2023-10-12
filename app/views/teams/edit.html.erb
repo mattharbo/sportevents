@@ -1,0 +1,18 @@
+<h2>Edit team id #<%= @team.id %></h2>
+
+<%= form_for @team do | f | %>
+
+	<%= f.label :name, "Full name of the team" %>
+	<%= f.text_field :name %>
+	<br>
+
+	<%= f.label :shortname, "2, 3 or 4 letters representing the team" %>
+	<%= f.text_field :shortname %>
+	<br>
+
+	<%= f.label :city, "City owning the team" %>
+	<%= f.text_field :city %>
+	<br><br>
+	<%= f.submit "Update team" %>
+	
+<% end %>

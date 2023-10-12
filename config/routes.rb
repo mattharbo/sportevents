@@ -9,6 +9,6 @@ Rails.application.routes.draw do
   resources :leagues, only: [:index,:new,:create,:show,:edit,:update,:destroy]
   resources :seasons, only: [:index,:new,:create,:show,:edit,:update,:destroy]
   resources :competitions, only: [:index]
-  resources :teams, only: [:index]
+  resources :teams, only: [:index,:new,:create,:show,:edit,:update,:destroy]
 
 end

@@ -3,7 +3,7 @@ class SeasonsController < ApplicationController
 	before_action :set_season, only: [:show, :edit, :update, :destroy]
 
 	def index
-		@seasons=Season.all
+		@seasons=Season.all.order("id asc")
 	end
 
 	def new
