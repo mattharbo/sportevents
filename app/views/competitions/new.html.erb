@@ -1,0 +1,15 @@
+<h2>Create a new competition</h2>
+
+<%= form_for @competition do | f | %>
+
+	<%= f.label :league_id, "Select the league" %>
+	<%= f.select :league_id, @leagues.map{ |c| [c.name, c.id] } %>
+	<br><br>
+
+	<%= f.label :season_id, "Select the season" %>
+	<%= f.select :season_id, @seasons.map{ |d| [d.startyear, d.id] } %>
+
+	<br><br>
+	<%= f.submit "Create competition" %>
+	
+<% end %>

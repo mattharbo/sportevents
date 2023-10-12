@@ -1,9 +1,16 @@
 <h1>Competitions</h1>
 
+<h4><%= link_to "Create a competition", new_competition_path %></h4>
+
 <% @competitions.each do |competition| %>
 	<%= competition.id %> • 
 	<%= competition.league.name %>
 	<%= competition.season.startyear %>/<%= competition.season.startyear.to_i+1 %>
 	(<%= competition.league.desc %>)
+
+	(<small><%= link_to "Edit", edit_competition_path(competition.id) %></small>)
+
+	(<small><%= link_to "Delete", competition_path(competition), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %></small>)
+
 	<br>
 <% end %>
