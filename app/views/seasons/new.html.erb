@@ -1,0 +1,10 @@
+<h2>Create a new season</h2>
+
+<%= form_for @season do | f | %>
+
+	<%= f.label :startyear, "Year when the season starts" %>
+	<%= f.text_field :startyear %>
+	<br><br>
+	<%= f.submit "Create season" %>
+	
+<% end %>

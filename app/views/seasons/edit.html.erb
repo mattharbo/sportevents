@@ -1,0 +1,10 @@
+<h2>Edit season id #<%= @season.id %></h2>
+
+<%= form_for @season do | f | %>
+
+	<%= f.label :startyear, "Year when the season starts" %>
+	<%= f.text_field :startyear %>
+	<br><br>
+	<%= f.submit "Update season" %>
+	
+<% end %>

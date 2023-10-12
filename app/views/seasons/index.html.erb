@@ -1,7 +1,14 @@
 <h1>All seasons</h1>
 
+<h4><%= link_to "Create a season", new_season_path %></h4>
+
 <% @seasons.each do |season| %>
 	<%= season.id %> • 
 	<%= season.startyear %>/<%= season.startyear.to_i + 1 %>
+
+	(<small><%= link_to "Edit", edit_season_path(season.id) %></small>)
+
+	(<small><%= link_to "Delete", season_path(season), data: { turbo_method: :delete, turbo_confirm: 'are you sure?' } %></small>)
+
 	<br>
 <% end %>

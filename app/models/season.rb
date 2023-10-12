@@ -1,3 +1,3 @@
 class Season < ApplicationRecord
-	has_many :seasons, dependent: :destroy
+	has_many :competitions, dependent: :destroy
 end

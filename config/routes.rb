@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   root "standalonepages#homepage"
   resources :leagues, only: [:index]
-  resources :seasons, only: [:index]
+  resources :seasons, only: [:index,:new,:create,:show,:edit,:update,:destroy]
   resources :competitions, only: [:index]
   resources :teams, only: [:index]
 
