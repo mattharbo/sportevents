@@ -4,7 +4,10 @@
 
 <% @fixtures.each do |fixture| %>
 	<%= fixture.id %> • 
-	<small><b>Played</b> <%= fixture.finished? ? "🟢" : "🔴" %> |</small>
+	<small>
+		Played <%= fixture.finished? ? "🟢" : "🔴" %> 
+		[<%= fixture.competition.league.name%> <%= fixture.competition.season.startyear%>]
+	</small>
 	<%= fixture.hometeam.name %>
 
 	<% if(fixture.scorehome != nil && fixture.scoreaway != nil) %>
