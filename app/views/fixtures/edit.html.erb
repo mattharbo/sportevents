@@ -2,6 +2,11 @@
 
 <%= form_for @fixture do | f | %>
 
+	<%= f.label :competition_id, "Select the competition" %>
+	<%= f.select :competition_id, @competitions.map{ |e| [e.league.name..e.season.startyear, e.id] } %>
+	<br><br>
+
+
 	<%= f.label :hometeam_id, "Select the home team" %>
 	<%= f.select :hometeam_id, @teams.map{ |c| [c.name, c.id] } %>
 	<br><br>

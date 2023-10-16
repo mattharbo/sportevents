@@ -1,6 +1,7 @@
 class FixturesController < ApplicationController
 
   before_action :get_all_teams, only: [:edit, :new]
+  before_action :get_all_competitions, only: [:edit, :new]
   before_action :set_fixture, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -15,9 +16,12 @@ class FixturesController < ApplicationController
   end
 
   def create
+    selectedcompetition=Competition.find(params[:fixture][:competition_id])
     selectedhometeam=Team.find(params[:fixture][:hometeam_id])
     selectedawayteam=Team.find(params[:fixture][:awayteam_id])
-    Fixture.create(hometeam:selectedhometeam,
+    Fixture.create(
+      competition:selectedcompetition,
+      hometeam:selectedhometeam,
       awayteam:selectedawayteam,
       # dateandtime:xxxx,
       finished:false
@@ -29,6 +33,7 @@ class FixturesController < ApplicationController
   end
 
   def update
+    selectedcompetition=Competition.find(params[:fixture][:competition_id])
     selectedhometeam=Team.find(params[:fixture][:hometeam_id])
     selectedawayteam=Team.find(params[:fixture][:awayteam_id])
     @fixture.update(hometeam:selectedhometeam,
@@ -36,7 +41,8 @@ class FixturesController < ApplicationController
       # dateandtime:xxxx,
       scorehome:params[:fixture][:scorehome],
       scoreaway:params[:fixture][:scoreaway],
-      finished:params[:finished]
+      finished:params[:finished],
+      competition:selectedcompetition
       )
     redirect_to fixtures_path
   end
@@ -60,8 +66,12 @@ class FixturesController < ApplicationController
     @teams=Team.all
   end
 
+  def get_all_competitions
+    @competitions=Competition.all
+  end
+
   def fixture_params
-    params.require(:fixture).permit(:hometeam, :awayteam, :dateandtime, :scorehome, :scoreaway, :finished)    
+    params.require(:fixture).permit(:hometeam, :awayteam, :dateandtime, :scorehome, :scoreaway, :finished, :competition)    
   end
 
 end
