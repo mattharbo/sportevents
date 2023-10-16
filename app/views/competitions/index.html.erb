@@ -4,9 +4,8 @@
 
 <% @competitions.each do |competition| %>
 	<%= competition.id %> • 
-	<%= competition.league.name %>
+	<b><%= competition.league.name %></b>
 	<%= competition.season.startyear %>/<%= competition.season.startyear.to_i+1 %>
-	(<%= competition.league.desc %>)
 
 	(<small><%= link_to "Edit", edit_competition_path(competition.id) %></small>)
 

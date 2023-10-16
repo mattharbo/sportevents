@@ -1,0 +1,15 @@
+<h2>Create a new fixture</h2>
+
+<%= form_for @fixture do | f | %>
+
+	<%= f.label :hometeam_id, "Select the HOME team" %>
+	<%= f.select :hometeam_id, @teams.map{ |c| [c.name, c.id] } %>
+	<br><br>
+
+	<%= f.label :awayteam_id, "Select the AWAY team" %>
+	<%= f.select :awayteam_id, @teams.map{ |d| [d.name, d.id] } %>
+
+	<br><br>
+	<%= f.submit "Create fixture" %>
+	
+<% end %>

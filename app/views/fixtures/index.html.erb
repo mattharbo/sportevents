@@ -1,0 +1,22 @@
+<h1>Fixtures</h1>
+
+<h4><%= link_to "Create a fixture", new_fixture_path %></h4>
+
+<% @fixtures.each do |fixture| %>
+	<%= fixture.id %> • 
+	<small><b>Played</b> <%= fixture.finished? ? "🟢" : "🔴" %> |</small>
+	<%= fixture.hometeam.name %>
+
+	<% if(fixture.scorehome != nil && fixture.scoreaway != nil) %>
+		<b><%= fixture.scorehome %> - <%= fixture.scoreaway %></b>
+	<% else %>
+		vs.
+	<% end %>
+
+	<%= fixture.awayteam.name %>
+
+	(<small><%= link_to "Edit", edit_fixture_path(fixture.id) %></small>)
+
+	(<small><%= link_to "Delete", fixture_path(fixture), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %></small>)
+	<br>
+<% end %>
