@@ -16,14 +16,30 @@ class FixturesController < ApplicationController
   end
 
   def create
-    selectedcompetition=Competition.find(params[:fixture][:competition_id])
-    selectedhometeam=Team.find(params[:fixture][:hometeam_id])
-    selectedawayteam=Team.find(params[:fixture][:awayteam_id])
+    
+    select_dropdown
     Fixture.create(
-      competition:selectedcompetition,
-      hometeam:selectedhometeam,
-      awayteam:selectedawayteam,
-      # dateandtime:xxxx,
+      competition:select_dropdown[0],
+      hometeam:select_dropdown[1],
+      awayteam:select_dropdown[2],
+
+      # dateandtime:Time.parse("2023/10/17 06:30"),
+      dateandtime:Time.parse(
+        # => year YYYY
+        params[:fixture]["dateandtime(1i)"] +
+        "/" +
+        # => month MM
+        params[:fixture]["dateandtime(2i)"] +
+        "/" +
+        # => day DD
+        params[:fixture]["dateandtime(3i)"] +
+        " " +
+        # => hour HH
+        params[:fixture]["dateandtime(4i)"] +
+        ":" +
+        # minutes MM
+        params[:fixture]["dateandtime(5i)"]),
+      
       finished:false
       )
     redirect_to fixtures_path
@@ -33,16 +49,24 @@ class FixturesController < ApplicationController
   end
 
   def update
-    selectedcompetition=Competition.find(params[:fixture][:competition_id])
-    selectedhometeam=Team.find(params[:fixture][:hometeam_id])
-    selectedawayteam=Team.find(params[:fixture][:awayteam_id])
-    @fixture.update(hometeam:selectedhometeam,
-      awayteam:selectedawayteam,
+    select_dropdown
+    @fixture.update(hometeam:select_dropdown[1],
+      awayteam:select_dropdown[2],
       # dateandtime:xxxx,
       scorehome:params[:fixture][:scorehome],
       scoreaway:params[:fixture][:scoreaway],
       finished:params[:finished],
-      competition:selectedcompetition
+      dateandtime:Time.parse(
+        params[:fixture]["dateandtime(1i)"] +
+        "/" +
+        params[:fixture]["dateandtime(2i)"] +
+        "/" +
+        params[:fixture]["dateandtime(3i)"] +
+        " " +
+        params[:fixture]["dateandtime(4i)"] +
+        ":" +
+        params[:fixture]["dateandtime(5i)"]),
+      competition:select_dropdown[0]
       )
     redirect_to fixtures_path
   end
@@ -53,10 +77,17 @@ class FixturesController < ApplicationController
   end
 
   # ****
-  # **** Private function starting from here
+  # **** Private functions starting from here
   # ****
 
   private
+
+  def select_dropdown
+    selectedcompetition=Competition.find(params[:fixture][:competition_id])
+    selectedhometeam=Team.find(params[:fixture][:hometeam_id])
+    selectedawayteam=Team.find(params[:fixture][:awayteam_id])
+    return selectedcompetition, selectedhometeam, selectedawayteam
+  end
 
   def set_fixture
     @fixture = Fixture.find(params[:id])
@@ -75,6 +106,3 @@ class FixturesController < ApplicationController
   end
 
 end
-
-
-

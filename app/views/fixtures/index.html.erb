@@ -7,6 +7,7 @@
 	<small>
 		Played <%= fixture.finished? ? "🟢" : "🔴" %> 
 		[<%= fixture.competition.league.name%> <%= fixture.competition.season.startyear%>]
+		<%= fixture.dateandtime.localtime %>
 	</small>
 	<%= fixture.hometeam.name %>
 

@@ -6,6 +6,12 @@
 	<%= f.select :competition_id, @competitions.map{ |e| [e.league.name..e.season.startyear, e.id] } %>
 	<br><br>
 
+	<%= f.label :dateandtime, "Select the date & time (⚠️ UTC retrieve by default)" %>
+	<%= f.datetime_select :dateandtime %>
+	<br><br><small>
+	Now in UTC <%= Time.now.utc%> vs. Now in local time <%= Time.now.localtime %>
+	</small>
+	<br><br>
 
 	<%= f.label :hometeam_id, "Select the home team" %>
 	<%= f.select :hometeam_id, @teams.map{ |c| [c.name, c.id] } %>

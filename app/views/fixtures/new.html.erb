@@ -14,6 +14,10 @@
 	<%= f.select :awayteam_id, @teams.map{ |d| [d.name, d.id] } %>
 	<br><br>
 
+	<%= f.label :dateandtime, "Select the date & time" %>
+	<%= f.datetime_select :dateandtime %>
+	<br><br>
+
 	<%= f.submit "Create fixture" %>
 	
 <% end %>
