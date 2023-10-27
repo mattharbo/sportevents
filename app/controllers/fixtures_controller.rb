@@ -5,7 +5,7 @@ class FixturesController < ApplicationController
   before_action :set_fixture, only: [:show, :edit, :update, :destroy]
 
   def index
-    @fixtures=Fixture.all.order("id asc")
+    @fixtures=Fixture.all.order("dateandtime desc")
   end
 
   def show
@@ -40,7 +40,8 @@ class FixturesController < ApplicationController
         # minutes MM
         params[:fixture]["dateandtime(5i)"]),
       
-      finished:false
+      finished:false,
+      round:params[:fixture][:round]
       )
     redirect_to fixtures_path
   end
@@ -66,7 +67,8 @@ class FixturesController < ApplicationController
         params[:fixture]["dateandtime(4i)"] +
         ":" +
         params[:fixture]["dateandtime(5i)"]),
-      competition:select_dropdown[0]
+      competition:select_dropdown[0],
+      round:params[:fixture][:round]
       )
     redirect_to fixtures_path
   end
@@ -102,7 +104,7 @@ class FixturesController < ApplicationController
   end
 
   def fixture_params
-    params.require(:fixture).permit(:hometeam, :awayteam, :dateandtime, :scorehome, :scoreaway, :finished, :competition)    
+    params.require(:fixture).permit(:hometeam, :awayteam, :dateandtime, :scorehome, :scoreaway, :finished, :competition, :round)    
   end
 
 end
