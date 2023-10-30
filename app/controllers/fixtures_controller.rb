@@ -9,6 +9,9 @@ class FixturesController < ApplicationController
   end
 
   def show
+
+    
+
   end
 
   def new
@@ -16,33 +19,48 @@ class FixturesController < ApplicationController
   end
 
   def create
+
+    hometeam=select_dropdown[1]
+    awayteam=select_dropdown[2]
+    year=params[:fixture]["dateandtime(1i)"]
+    month=params[:fixture]["dateandtime(2i)"].rjust(2, '0')
+    day=params[:fixture]["dateandtime(3i)"].rjust(2, '0')
+    hours=params[:fixture]["dateandtime(4i)"]
+    minutes=params[:fixture]["dateandtime(5i)"]
+
+    # --- Create instance in DB
     
     select_dropdown
     Fixture.create(
       competition:select_dropdown[0],
-      hometeam:select_dropdown[1],
-      awayteam:select_dropdown[2],
-
+      hometeam:hometeam,
+      awayteam:awayteam,
       # dateandtime:Time.parse("2023/10/17 06:30"),
-      dateandtime:Time.parse(
-        # => year YYYY
-        params[:fixture]["dateandtime(1i)"] +
-        "/" +
-        # => month MM
-        params[:fixture]["dateandtime(2i)"] +
-        "/" +
-        # => day DD
-        params[:fixture]["dateandtime(3i)"] +
-        " " +
-        # => hour HH
-        params[:fixture]["dateandtime(4i)"] +
-        ":" +
-        # minutes MM
-        params[:fixture]["dateandtime(5i)"]),
-      
+      dateandtime:Time.parse(year + "/" + month + "/" + day + " " + hours + ":" + minutes),
       finished:false,
       round:params[:fixture][:round]
       )
+
+      # --- Create trello card
+
+      require 'uri'
+      require 'net/http'
+
+      trellodatetime = year + "-" + month + "-" + day + "T" + (hours.to_i-1).to_s + ":" + minutes +":00.000Z"
+
+      uri = URI('https://api.trello.com/1/cards')
+      params = {
+        :idList => '650176b25abd1588a073fb9e',
+        :key => 'a540f1bf835a384aba71ba64bab207d9',
+        :token => 'ATTA7061f69e09fa9e5616199f3276f4716f61f1720ddb4fe870bb78ed54d59613a5E0D4F925',
+        :name => "⚽️ Ligue 1 • #{hometeam.shortname} (x) vs. (x) #{awayteam.shortname}",
+        :desc => "Description coming soon",
+        :due => trellodatetime
+      }
+
+      res = Net::HTTP.post_form(uri,params)
+      @toprint = res.body if res.is_a?(Net::HTTPSuccess)
+
     redirect_to fixtures_path
   end
 
