@@ -6,12 +6,12 @@ class FixturesController < ApplicationController
 
   def index
     @fixtures=Fixture.all.order("dateandtime desc")
+
+    # --- For future needs
+    # @fixtures=Fixture.all.group_by { |x| [x.round]}
   end
 
   def show
-
-    
-
   end
 
   def new
@@ -53,7 +53,7 @@ class FixturesController < ApplicationController
         :idList => '650176b25abd1588a073fb9e',
         :key => 'a540f1bf835a384aba71ba64bab207d9',
         :token => 'ATTA7061f69e09fa9e5616199f3276f4716f61f1720ddb4fe870bb78ed54d59613a5E0D4F925',
-        :name => "⚽️ Ligue 1 • #{hometeam.shortname} (x) vs. (x) #{awayteam.shortname}",
+        :name => "⚽️ Ligue 1 • #{hometeam.shortname} v. #{awayteam.shortname}",
         :desc => "Description coming soon",
         :due => trellodatetime
       }

@@ -1,0 +1,17 @@
+<h1>Standings</h1>
+
+<h4><%= link_to "Create a fixture", new_fixture_path %></h4>
+
+<% @standings.each do |standing| %>
+
+	<%= standing.id %> •
+	<%= standing.competition.league.name %>
+	(<%= standing.competition.season.startyear %>)
+	- Round <%= standing.round %> -
+	<%= standing.team.name %> | 
+	<%= standing.points %> pts
+
+	<br>
+<% end %>
+
+<br>

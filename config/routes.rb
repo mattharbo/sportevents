@@ -13,5 +13,6 @@ Rails.application.routes.draw do
   resources :competitions, only: [:index,:new,:create,:show,:edit,:update,:destroy]
   resources :teams, only: [:index,:new,:create,:show,:edit,:update,:destroy]
   resources :fixtures, only: [:index,:new,:create,:show,:edit,:update,:destroy]
+  resources :standings, only: [:index]
 
 end

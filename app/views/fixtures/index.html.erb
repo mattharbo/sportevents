@@ -2,27 +2,28 @@
 
 <h4><%= link_to "Create a fixture", new_fixture_path %></h4>
 
+<!-- OLD CODE FROM HERE -->
+
+
 <% @fixtures.each do |fixture| %>
-	<%= fixture.id %> • 
 	<small>
-		Played <%= fixture.finished? ? "🟢" : "🔴" %> 
+		(<%= link_to "Delete", fixture_path(fixture), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>)
+		<%= fixture.id %> • 
+		<%= fixture.finished? ? "🟢" : "🔴" %> 
 		[<%= fixture.competition.league.name%> <%= fixture.competition.season.startyear%>][Round <%= fixture.round %>]
 		<%= fixture.dateandtime.localtime %>
+		(<%= link_to "Edit", edit_fixture_path(fixture.id) %>)
+		(<%= link_to "Go to", fixture_path(fixture.id), target: :_blank %>)
+		&nbsp;&nbsp;&nbsp;&nbsp;
 	</small>
 	<%= fixture.hometeam.name %>
 
 	<% if(fixture.scorehome != nil && fixture.scoreaway != nil) %>
 		<b><%= fixture.scorehome %> - <%= fixture.scoreaway %></b>
 	<% else %>
-		vs.
+		<b style="color:lightgrey;">vs.</b>
 	<% end %>
 
-	<%= fixture.awayteam.name %>
-
-	(<small><%= link_to "Go to", fixture_path(fixture.id), target: :_blank %></small>)
-
-	(<small><%= link_to "Edit", edit_fixture_path(fixture.id) %></small>)
-
-	(<small><%= link_to "Delete", fixture_path(fixture), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %></small>)
+	<%= fixture.awayteam.name %>	
 	<br>
 <% end %>
