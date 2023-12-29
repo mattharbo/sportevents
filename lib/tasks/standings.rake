@@ -100,7 +100,7 @@ if update_needed == true
 			team:get_team(rank["team"]["name"]).take,
 			rank:rank["rank"],
 			points:rank["points"],
-			# game_played:rank["all"]["played"]
+			played:rank["all"]["played"]
 		)		
 
 	end 

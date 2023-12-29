@@ -8,9 +8,10 @@
 	<%= standing.competition.league.name %>
 	(<%= standing.competition.season.startyear %>)
 	- Round <%= standing.round %> -
+	<%= standing.played %> played games |
 	<%= standing.team.name %> | 
 	<%= standing.points %> pts
-
+	<small>(out of <%= standing.played*3 %>	pts)</small>
 	<br>
 <% end %>
 
